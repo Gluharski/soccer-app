@@ -1,0 +1,14 @@
+.leagues {
+	display: flex;
+	flex-direction: column;
+}
+
+.leagues a {
+	display: flex;
+	align-items: center;
+}
+
+.league img {
+	width: 25px;
+	height: 25px;
+}

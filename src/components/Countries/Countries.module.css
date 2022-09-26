@@ -1,0 +1,40 @@
+.countries__container {
+	display: flex;
+	justify-content: flex-start;
+	justify-self: center;
+	flex-wrap: wrap;
+	background-color: whitesmoke;
+	/* flex-direction: column; */
+}
+
+.countries__container a {
+	width: 150px;
+	height: 150px;
+	margin: 20px;
+	text-decoration: none;
+	color: black;
+	font-weight: 700;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: white;
+}
+
+.countries__container a:hover {
+	box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+	transform: scale(1.5);
+}
+
+/* .countries__container .country__flag {
+	width: 175px;
+	height: 175px;
+	background-color: coral;
+} */
+
+.countries__container .country__flag img {
+	width: 100%;
+	height: 100%;
+	/* display: block; */
+}
+
+.countries__container .country__name {
+	text-align: center;
+}

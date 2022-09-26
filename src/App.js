@@ -1,38 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 
-import Item from './components/Item';
-import Profile from './components/Profile';
+import Countries from './components/Countries/Countries';
+import Leagues from './components/Leagues/Leagues';
+import Fixtures from './components/Fixtures/Fixtures';
 
 function App() {
-  const [favs, setFavs] = useState([]);
-  const [items, setItems] = useState([
-    { id: 1, title: 'Maritsa Plovdiv - Spartak Plovdiv' },
-    { id: 2, title: 'Spartak Plovdiv - Botev Plovdiv' },
-    { id: 3, title: 'Botev Plovdiv - Martisa Plovdiv' }
-  ]);
+    const [countries, setCountries] = useState([]);
 
-  const addToFav = (event) => {
-    setFavs(prevState => [...prevState, {
-      id: event, title: event
-    }]);
-  };
+    useEffect(() => {
+        fetch('https://api-football-v1.p.rapidapi.com/v3/countries', {
+            headers: {
+                'X-RapidAPI-Key': '16393793dbmsh4d76b449ff481c6p19207bjsn3ae3d8e407ae',
+                'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+            }
+        })
+            .then(response => response.json())
+            .then(response => {
+                setCountries(response.response);
+            })
+            .catch(err => console.error(err));
+    }, []);
+
+
+    // routes
 
     return (
-      <div className="App">
-        <Profile matchesCount={favs} />
-
-        <ul>
-          {items.map(x => (
-            <Item
-              handleClick={() => addToFav(x.id)}
-              title={x.title}
-              key={x.id}>
-            </Item>
-          ))}
-        </ul>
-      </div>
+        <div className="App">
+            <Routes>
+                <Route path='/' element={<Countries countries={countries} />} />
+                <Route path='/country/:countryName/leagues' element={<Leagues />} />
+                <Route path='/country/:countryName/leagues/:leagueId' element={<Fixtures />} />
+            </Routes>
+        </div>
     );
-  }
+}
 
 export default App;
