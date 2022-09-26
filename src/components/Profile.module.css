@@ -1,0 +1,21 @@
+.hot {
+	color: brown;
+	background-color: white;
+	font-weight: 700;
+	font-size: 30px;
+	width: 100%;
+	text-align: center;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.normal {
+	color: black;
+	font-weight: 700;
+	font-size: 30px;
+	background-color: white;
+	font-weight: 700;
+	font-size: 30px;
+	width: 100%;
+	text-align: center;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
