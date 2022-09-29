@@ -49,6 +49,10 @@ function App() {
                 </Routes>
             </main>
 
+            <aside className={styles['aside-soccer-news']}>
+                <h2>News</h2>
+            </aside>
+
         </div>
     );
 }

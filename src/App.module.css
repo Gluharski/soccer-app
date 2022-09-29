@@ -4,14 +4,24 @@
 	box-sizing: border-box;
 }
 
+body {
+	background-color: #fff;
+}
+
 .App {
 	width: 1440px;
 	display: flex;
+	justify-content: space-between;
 	margin: 0 auto;
-
-	background-color: red;
+	background-color: #fff;
 }
 
-aside {
+.aside-navbar {
 	width: 250px;
+	background-color: #fff;
+}
+
+.aside-soccer-news {
+	width: 250px;
+	background-color: #fff;
 }

@@ -21,7 +21,7 @@ const Match = ({ data }) => {
 					</div>
 				</div>
 
-				<div className={styles['match__separator']}>:</div>
+				{/* <div className={styles['match__separator']}>:</div> */}
 
 				<div className={styles['match__row__teams--away']}>
 					<div className={styles['match__row__away__team--name']}>
