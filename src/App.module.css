@@ -1,0 +1,17 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.App {
+	width: 1440px;
+	display: flex;
+	margin: 0 auto;
+
+	background-color: red;
+}
+
+aside {
+	width: 250px;
+}

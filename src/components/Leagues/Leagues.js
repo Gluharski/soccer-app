@@ -19,15 +19,13 @@ const Leagues = () => {
 				setData(response.response)
 			})
 			.catch(err => console.error(err));
-	}, []);
+	}, [countryName]);
 
-	console.log(data);
-	
 	return (
 		<section className={styles['leagues']}>
 			{data.map(x => (
 				<Link to={`/country/${x.name}/leagues/${x.league.id}`}>
-					<img src={x.league.logo} />
+					<img src={x.league.logo} alt={x.league.id} />
 					{x.league.name}
 				</Link>
 			))}

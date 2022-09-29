@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import './App.css';
+import styles from './App.module.css';
 
 import Countries from './components/Countries/Countries';
 import Leagues from './components/Leagues/Leagues';
@@ -27,13 +27,28 @@ function App() {
     // routes
 
     return (
-        <div className="App">
+        <div className={styles['App']}>
             {/* two column layout */}
-            <Routes>
+            {/* <Routes>
                 <Route path='/' element={<Countries countries={countries} />} />
                 <Route path='/country/:countryName/leagues' element={<Leagues />} />
                 <Route path='/country/:countryName/leagues/:leagueId' element={<Fixtures />} />
-            </Routes>
+            </Routes> */}
+
+            <aside className={styles['aside-navbar']}>
+                <Routes>
+                    <Route path='/' element={<Countries countries={countries} />} />
+                    <Route path='/country/:countryName/leagues' element={<Leagues />} />
+                </Routes>
+            </aside>
+
+            <main>
+                <h1>Welcome world!</h1>
+                <Routes>
+                    <Route path='/country/:countryName/leagues/:leagueId' element={<Fixtures />} />
+                </Routes>
+            </main>
+
         </div>
     );
 }
