@@ -28,6 +28,7 @@ function App() {
 
     return (
         <div className="App">
+            {/* two column layout */}
             <Routes>
                 <Route path='/' element={<Countries countries={countries} />} />
                 <Route path='/country/:countryName/leagues' element={<Leagues />} />

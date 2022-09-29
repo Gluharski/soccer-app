@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import Match from "../Match/Match";
+
 const Fixtures = () => {
 	const [data, setData] = useState([]);
 	const { leagueId } = useParams();
@@ -17,10 +19,8 @@ const Fixtures = () => {
 				setData(response.response)
 			})
 			.catch(err => console.error(err));
-	}, []);
+	}, [leagueId]);
 
-
-	// check for currect league id
 	useEffect(() => {
 		fetch(`https://api-football-v1.p.rapidapi.com/v3/standings?season=2022&league=${leagueId}`, {
 			headers: {
@@ -31,17 +31,12 @@ const Fixtures = () => {
 			.then(response => response.json())
 			.then(response => console.log(response))
 			.catch(err => console.error(err));
-	}, []);
-
+	}, [leagueId]);
 
 	return (
-		<>
-			{data.map(x => (
-				<li>
-					{x.teams.home.name} - {x.teams.away.name}
-				</li>
-			))}
-		</>
+		<section className="fixtures">
+			{data.map(x => <Match data={x} />)}
+		</section>
 	)
 };
 
