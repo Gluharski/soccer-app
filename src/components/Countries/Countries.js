@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import styles from './Countries.module.css';
 
 const Countries = ({ countries }) => {
-	console.log(countries);
 	return (
 		<section className={styles['countries__container']}>
 			{countries.map(x => (

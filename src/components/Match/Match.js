@@ -2,10 +2,7 @@ import Date from './Date/Date';
 import styles from './Match.module.css';
 
 const Match = ({ data }) => {
-	console.log(data);
-
 	// TODO: check if winner => bold all the text
-
 	return (
 		<div className={styles['match__row']}>
 			<div className="match__row__date">
