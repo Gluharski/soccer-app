@@ -23,9 +23,6 @@ function App() {
             .catch(err => console.error(err));
     }, []);
 
-
-    // routes
-
     return (
         <div className={styles['App']}>
             {/* two column layout */}
@@ -43,7 +40,7 @@ function App() {
             </aside>
 
             <main>
-                <h1>Welcome world!</h1>
+                {/* top 5 leagues => fixtures for daily */}
                 <Routes>
                     <Route path='/country/:countryName/leagues/:leagueId' element={<Fixtures />} />
                 </Routes>
@@ -51,7 +48,10 @@ function App() {
 
             <aside className={styles['aside-soccer-news']}>
                 <h2>News</h2>
+                {/* world soccer news */}
             </aside>
+
+            {/* when you click in navbar => show current news in this league */}
 
         </div>
     );

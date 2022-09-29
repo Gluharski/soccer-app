@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Match from "../Match/Match";
+import styles from './Fixtures.module.css';
 
 const Fixtures = () => {
 	const [data, setData] = useState([]);
@@ -34,7 +35,7 @@ const Fixtures = () => {
 	}, [leagueId]);
 
 	return (
-		<section className="fixtures">
+		<section className={styles['fixtures']}>
 			{data.map(x => <Match data={x} />)}
 		</section>
 	)

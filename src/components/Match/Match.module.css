@@ -1,5 +1,15 @@
 .match__row {
 	display: flex;
+	align-items: center;
+	padding: 10px;
+}
+
+.match__row:nth-child(even) {
+	background-color: whitesmoke;
+}
+
+.match__row:hover {
+	background-color: coral;
 }
 
 .match__row__teams {
@@ -43,4 +53,11 @@
 	display: flex;
 	align-items: center;
 	margin: 0 5px;
+}
+
+
+.match__row__date {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
