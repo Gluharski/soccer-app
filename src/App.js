@@ -5,9 +5,6 @@ import Details from './components/Details';
 import Team from './components/Team';
 import './App.css';
 
-import LeagueDashboard from './components/LeagueDashboard/LeagueDashboard';
-import LastFixtures from './components/Fixtures/LastFixtures/LastFixtures';
-
 function App() {
     const [matches, setMatches] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -33,59 +30,25 @@ function App() {
                 <h3>
                     {matches.length} matches live
                 </h3>
+
                 {matches.length > 0
                     ? matches.map(x =>
-                        <div>
+                        <div className='table'>
                             <Link to={`/match-details/${x.fixture.id}`}>
                                 {x.fixture.status.elapsed}'
 
-            <main>
-                {data.map(x => (
-                        <div className={styles['match__row']}>
-                            <div className="match__row__date">
-                                {/* {data.fixture.date} */}
-                                <Date date={x.fixture.date} />
-                            </div>
-
-                            <div className={styles['match__row__teams']}>
-                                <div className={styles['match__row__teams--home']}>
-                                    <div className={styles['match__row__home__team--name']}>
-                                        <div className={styles['match__row__home__team--logo']}>
-                                            <img src={x.teams.home.logo} alt={x.teams.home.name} />
-                                        </div>
-                                        {x.teams.home.name}
-                                    </div>
-                                    <div className="match__row--home--result">
-                                        {x.goals.home}
-                                    </div>
-                                </div>
-
-                                {/* <div className={styles['match__separator']}>:</div> */}
-
-                                <div className={styles['match__row__teams--away']}>
-                                    <div className={styles['match__row__away__team--name']}>
-                                        <div className={styles['match__row__away__team--logo']}>
-                                            <img src={x.teams.away.logo} alt={x.teams.away.name} />
-                                        </div>
-                                        {x.teams.away.name}
-                                    </div>
-                                    <div className="match__row--away--result">
-                                        {x.goals.away}
-                                    </div>
-                                </div>
-                            </div>
+                                {x.teams.home.name} - {x.teams.away.name}
+                            </Link>
                         </div>
-                    )) &&
-                <Routes>
-                    <Route path='/country/:countryName/leagues/:leagueId' element={<Fixtures />} />
-                </Routes>
-            
-                }
+                    )
+                    : null}
             </main>
 
-            <aside className={styles['aside-soccer-news']}>
-                <h2>News</h2>
-                {/* world soccer news */}
+            <aside>
+                <Routes>
+                    <Route path='/match-details/:matchId' element={<Details />} />
+                    <Route path='/team-details/:teamId' element={<Team />} />
+                </Routes>
             </aside>
         </section>
     );
