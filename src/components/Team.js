@@ -8,6 +8,7 @@ const Team = () => {
 	const [transfers, setTransfers] = useState([]);
 	const [teamInformation, setTeamInformation] = useState([]);
 	const [upcomingMatches, setUpcomingMatches] = useState([]);
+	const [lastMatches, setLastMatches] = useState([]);
 	const { teamId } = useParams();
 
 	// venue
@@ -73,6 +74,23 @@ const Team = () => {
 
 	console.log(upcomingMatches);
 
+	useEffect(() => {
+		const options = {
+			method: 'GET',
+			headers: {
+				'X-RapidAPI-Key': '16393793dbmsh4d76b449ff481c6p19207bjsn3ae3d8e407ae',
+				'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+			}
+		};
+
+		fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?season=2022&team=${teamId}&last=5`, options)
+			.then(response => response.json())
+			.then(response => {
+				setLastMatches(response.response)
+			})
+			.catch(err => console.error(err));
+	}, []);
+
 	return (
 		<section className='team-details'>
 			<div className='header'>
@@ -97,9 +115,12 @@ const Team = () => {
 								<div className='venue-city'>
 									<b>City:</b> {x.venue.city}
 								</div>
-								<div className='venue-name'>
+								<div className='venue-name' title={x.venue.name}>
 									{/* TODO: bolded venue name in css */}
-									<b>Stadium:</b> {x.venue.name}
+									<b>Stadium:</b> {x.venue.name.length >= 10
+										? x.venue.name.substring(0,10) + '...'
+										: x.venue.name
+									}
 								</div>
 								<div className='venue-capacitiy'>
 									<b>Capacity:</b> {x.venue.capacity}
@@ -113,44 +134,60 @@ const Team = () => {
 			{/* next matches */}
 			<div className='next-match'>
 				<h3>Next Match</h3>
-				{upcomingMatches.map(x => (
+				{upcomingMatches.length > 0
+					?
+					upcomingMatches.map(x => (
+						<>
+							{/* header */}
+							<h3 className='next-match-league-name'>
+								{x.league.name}
+							</h3>
+							<h4 className='next-match-league-date'>
+								{x.fixture.date}
+							</h4>
 
-					<>
+							<div className='upcoming-match-teams'>
+								<div className='upcoming-match-home-team'>
+									{x.teams.home.name}
+									<div className='upcoming-match-logo-container'>
+										<img src={x.teams.home.logo} />
+									</div>
+								</div>
 
-						{/* header */}
-						<h3 className='next-match-league-name'>
-							{x.league.name}
-						</h3>
-						<h4 className='next-match-league-date'>
-							{x.fixture.date}
-						</h4>
+								<div className='upcoming-match-hour'>
+									{/* current hour */}
+									{x.fixture.timestamp}
+								</div>
 
-						<div className='upcoming-match-teams'>
-							<div className='upcoming-match-home-team'>
-								{x.teams.home.name}
-								<div className='upcoming-match-logo-container'>
-									<img src={x.teams.home.logo} />
+								<div className='upcoming-match-away-team'>
+									{x.teams.away.name}
+									<div className='upcoming-match-logo-container'>
+										<img src={x.teams.away.logo} />
+									</div>
 								</div>
 							</div>
+						</>
+					))
+					: 'There is no information about upcoming matches.'}
+			</div>
 
-							<div className='upcoming-match-hour'>
-								{/* current hour */}
-								{x.fixture.timestamp}
-							</div>
-
-							<div className='upcoming-match-away-team'>
-								{x.teams.away.name}
-								<div className='upcoming-match-logo-container'>
-									<img src={x.teams.away.logo} />
-								</div>
-							</div>
+			{/* last 5 matches */}
+			<div className='last-matches'>
+				<h3>last 5 matches</h3>
+				{lastMatches.map(x => (
+					<li>
+						<div className={x.teams.home.winner
+							? 'winner'
+							: null}>
+							{x.teams.home.name} {x.goals.home}
 						</div>
-					</>
-					// league name,
-					// date
-
-					// 3 column card =>
-					// name logo => date => name logo
+						-
+						<div className={x.teams.away.winner
+							? 'winner'
+							: null}>
+							{x.teams.away.name} {x.goals.away}
+						</div>
+					</li>
 				))}
 			</div>
 
