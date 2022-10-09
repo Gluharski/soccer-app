@@ -69,7 +69,6 @@ aside {
 	justify-content: space-between;
 }
 
-
 /* Team Componnet */
 .header h3 {
 	text-align: center;
@@ -98,11 +97,30 @@ aside {
 .next-match {
 	display: flex;
 	flex-direction: column;
+
+	padding: 10px;
+
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
 }
+
+h3.title-section {
+	margin-top: 5px;
+} 
 
 .next-match-league-name,
 .next-match-league-date {
 	text-align: center;
+	margin: 0;
+}
+
+.next-match-league-date .sub-title {
+	font-size: 12px;
+	font-style: italic;
+}
+
+.upcoming-match-hour {
+	font-size: 30px;
 }
 
 .upcoming-match-teams {
@@ -110,10 +128,12 @@ aside {
 	justify-content: space-between;
 	align-items: center;
 	text-align: center;
+	margin-top: 20px;
 }
 
 .upcoming-match-teams .upcoming-match-home-team,
 .upcoming-match-away-team {
+	width: 200px;
 	display: flex;
 	/* justify-content: center; */
 	flex-direction: column-reverse;

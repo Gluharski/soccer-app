@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
+import * as dateLibrary from '../utils/moment';
+
 import '../App.css';
 
 const Team = () => {
@@ -56,7 +58,6 @@ const Team = () => {
 			.catch(err => console.error(err));
 	}, []);
 
-
 	// next matches
 	useEffect(() => {
 		fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?team=${teamId}&next=1`, {
@@ -72,7 +73,7 @@ const Team = () => {
 			.catch(err => console.error(err));
 	}, []);
 
-	console.log(upcomingMatches);
+	console.log(upcomingMatches)
 
 	useEffect(() => {
 		const options = {
@@ -90,6 +91,8 @@ const Team = () => {
 			})
 			.catch(err => console.error(err));
 	}, []);
+
+	console.log(upcomingMatches)
 
 	return (
 		<section className='team-details'>
@@ -133,41 +136,47 @@ const Team = () => {
 
 			{/* next matches */}
 			<div className='next-match'>
-				<h3>Next Match</h3>
+				<h3 className='title-section'>NEXT MATCH</h3>
 				{upcomingMatches?.length > 0
 					?
-					upcomingMatches.map(x => (
-						<>
-							{/* header */}
-							<h3 className='next-match-league-name'>
-								{x.league.name}
-							</h3>
-							<h4 className='next-match-league-date'>
-								{x.fixture.date}
-							</h4>
-
-							<div className='upcoming-match-teams'>
-								<div className='upcoming-match-home-team'>
-									{x.teams.home.name}
-									<div className='upcoming-match-logo-container'>
-										<img src={x.teams.home.logo} />
+					upcomingMatches.map(x => {
+						return (
+							<>
+								{/* header */}
+								<h3 className='next-match-league-name'>
+									{x.league.name}
+								</h3>
+								<div className='next-match-league-date'>
+									<div className='sub-title'>
+										{x.league.round},
+										{dateLibrary.date(x.fixture.date)}
 									</div>
 								</div>
 
-								<div className='upcoming-match-hour'>
-									{/* current hour */}
-									{x.fixture.timestamp}
-								</div>
+								<div className='upcoming-match-teams'>
+									<div className='upcoming-match-home-team'>
+										{x.teams.home.name}
+										<div className='upcoming-match-logo-container'>
+											<img src={x.teams.home.logo} />
+										</div>
+									</div>
 
-								<div className='upcoming-match-away-team'>
-									{x.teams.away.name}
-									<div className='upcoming-match-logo-container'>
-										<img src={x.teams.away.logo} />
+									<div className='upcoming-match-hour'>
+										{/* current hour */}
+										{dateLibrary.time(x.fixture.date)}
+										{/* {dateLibrary.unix(x.fixture.timestamp)} */}
+									</div>
+
+									<div className='upcoming-match-away-team'>
+										{x.teams.away.name}
+										<div className='upcoming-match-logo-container'>
+											<img src={x.teams.away.logo} />
+										</div>
 									</div>
 								</div>
-							</div>
-						</>
-					))
+							</>
+						);
+					})
 					: 'There is no information about upcoming matches.'}
 			</div>
 
