@@ -15,12 +15,8 @@ export const time = (data) => {
 	return convertedHour;
 }
 
-// convert unix code
+// convert unix code`
 export const unix = (data) => {
 	const now = moment();
 	const convertedSeconds = moment().unix(data);
-	
-	// console.log(now);
-	
-	// return convertedSeconds;
 }

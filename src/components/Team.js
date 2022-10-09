@@ -73,7 +73,7 @@ const Team = () => {
 			.catch(err => console.error(err));
 	}, []);
 
-	console.log(upcomingMatches)
+	// console.log(upcomingMatches)
 
 	useEffect(() => {
 		const options = {
@@ -92,7 +92,7 @@ const Team = () => {
 			.catch(err => console.error(err));
 	}, []);
 
-	console.log(upcomingMatches)
+	// console.log(upcomingMatches)
 
 	return (
 		<section className='team-details'>
@@ -203,7 +203,7 @@ const Team = () => {
 			</div>
 
 			{/* transfer section */}
-			<div className='latest-transfers'>
+			{/* <div className='latest-transfers'>
 				<h3>latest transfers:</h3>
 				{transfers?.length ? transfers.map(x => (
 					<div>
@@ -214,7 +214,7 @@ const Team = () => {
 				))
 					: 'There is no data for transfers.'
 				}
-			</div>
+			</div> */}
 		</section>
 	)
 }
