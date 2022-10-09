@@ -1,3 +1,7 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
 .app {
 	width: 1024px;
 	margin: 0 auto;
@@ -13,13 +17,10 @@
 	padding: 10px 0;
 }
 
-
 .app-main {
 	padding: 10px 0;
 	padding-right: 10px;
 	flex: 1;
-	/* box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-	border-radius: 5px; */
 }
 
 aside {
@@ -30,12 +31,19 @@ aside {
 }
 
 .match-row {
-	display: flex;
+	display: block;
+	/* width: 100%; */
 	text-decoration: none;
-	align-items: center;
 	color: #000;
 	font-weight: 600;
 	padding: 10px;
+	transition: background color .3s ease-out;
+}
+
+.match-row-information {
+	width: 100%;
+	display: flex;
+	align-items: center;
 }
 
 .match-row .teams .home,
@@ -51,7 +59,14 @@ aside {
 
 .app .match-row:hover {
 	background-color: rgba(0, 0, 0, 0.5);
+	color: #fff;
 	cursor: pointer;
+}
+
+.home-team-information,
+.away-team-information {
+	display: flex;
+	justify-content: space-between;
 }
 
 
@@ -115,10 +130,14 @@ aside {
 	height: 75px;
 }
 
+.last-matches li {
+	display: flex;
+}
+
 .winner {
 	font-weight: 600;
 }
 
-.last-matches li {
-	display: flex;
+.live {
+	border: 3px solid green;
 }

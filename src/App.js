@@ -35,24 +35,32 @@ function App() {
                 {matches.length > 0
                     ? matches.map(x =>
                         <Link className='match-row' to={`/match-details/${x.fixture.id}`}>
-                            <div className='match-time'>
-                                {x.fixture.status.elapsed}'
-                            </div>
-                            <div className='teams'>
-                                {/* home team info */}
-                                <div className='home'>
-                                    {x.teams.home.name}
-                                    {x.goals.home}
+                            {/* <div className='match-row-information'> */}
+                                <div className='match-time'>
+                                    {x.fixture.status.elapsed}'
                                 </div>
+                                <div className='teams'>
+                                    {/* home team info */}
+                                    <div className='home-team-information'>
+                                        <div className='home-team-name'>
+                                            {x.teams.home.name}
+                                        </div>
+                                        <div className='home-team-goals'>
+                                            {x.goals.home}
+                                        </div>
+                                    </div>
 
-                                {/* away team info */}
-                                <div className='away'>
-                                    {x.teams.away.name}
-                                    <div>
-                                        {x.goals.away}
+                                    {/* away team info */}
+                                    <div className='away-team-information'>
+                                        <div className='away-team-name'>
+                                            {x.teams.away.name}
+                                        </div>
+                                        <div className='away-team-goals'>
+                                            {x.goals.away}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            {/* </div> */}
                         </Link>
                     )
                     : null}

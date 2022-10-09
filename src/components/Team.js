@@ -116,9 +116,9 @@ const Team = () => {
 									<b>City:</b> {x.venue.city}
 								</div>
 								<div className='venue-name' title={x.venue.name}>
-									{/* TODO: bolded venue name in css */}
-									<b>Stadium:</b> {x.venue.name.length >= 10
-										? x.venue.name.substring(0,10) + '...'
+									<b>Stadium:</b>
+									{x.venue.name?.length >= 10
+										? x.venue.name.substring(0, 10) + '...'
 										: x.venue.name
 									}
 								</div>
@@ -134,7 +134,7 @@ const Team = () => {
 			{/* next matches */}
 			<div className='next-match'>
 				<h3>Next Match</h3>
-				{upcomingMatches.length > 0
+				{upcomingMatches?.length > 0
 					?
 					upcomingMatches.map(x => (
 						<>
@@ -174,33 +174,37 @@ const Team = () => {
 			{/* last 5 matches */}
 			<div className='last-matches'>
 				<h3>last 5 matches</h3>
-				{lastMatches.map(x => (
-					<li>
-						<div className={x.teams.home.winner
-							? 'winner'
-							: null}>
-							{x.teams.home.name} {x.goals.home}
-						</div>
-						-
-						<div className={x.teams.away.winner
-							? 'winner'
-							: null}>
-							{x.teams.away.name} {x.goals.away}
-						</div>
-					</li>
-				))}
+				{lastMatches?.length > 0
+					? lastMatches.map(x => (
+						<li>
+							<div className={x.teams.home.winner
+								? 'winner'
+								: null}>
+								{x.teams.home.name} {x.goals.home}
+							</div>
+							-
+							<div className={x.teams.away.winner
+								? 'winner'
+								: null}>
+								{x.teams.away.name} {x.goals.away}
+							</div>
+						</li>
+					))
+					: 'There is no data for previous matches.'}
 			</div>
 
 			{/* transfer section */}
 			<div className='latest-transfers'>
 				<h3>latest transfers:</h3>
-				{transfers.map(x => (
+				{transfers?.length ? transfers.map(x => (
 					<div>
 						<Link to={`/player-details/${x.player.id}`}>
 							{x.player.name}
 						</Link>
 					</div>
-				))}
+				))
+					: 'There is no data for transfers.'
+				}
 			</div>
 		</section>
 	)

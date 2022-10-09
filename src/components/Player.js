@@ -13,13 +13,18 @@ const Player = () => {
 			}
 		})
 			.then(response => response.json())
-			.then(response => console.log(response))
+			.then(response => {
+				setPlayerInformation(response.response)
+			})
 			.catch(err => console.error(err));
 	}, []);
 
 	return (
 		<>
-			player information
+			{playerInformation.length > 0
+				? playerInformation.map(x => console.log(x))
+				: 'There is no data for this player.'
+			}
 		</>
 	)
 }
