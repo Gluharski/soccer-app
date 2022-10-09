@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/soccer-app/static/css/main.41373263.css",
-    "main.js": "/soccer-app/static/js/main.b2747f5f.js",
+    "main.css": "/soccer-app/static/css/main.446f8687.css",
+    "main.js": "/soccer-app/static/js/main.ee2e9629.js",
     "static/js/787.7e0b23c5.chunk.js": "/soccer-app/static/js/787.7e0b23c5.chunk.js",
     "index.html": "/soccer-app/index.html",
-    "main.41373263.css.map": "/soccer-app/static/css/main.41373263.css.map",
-    "main.b2747f5f.js.map": "/soccer-app/static/js/main.b2747f5f.js.map",
+    "main.446f8687.css.map": "/soccer-app/static/css/main.446f8687.css.map",
+    "main.ee2e9629.js.map": "/soccer-app/static/js/main.ee2e9629.js.map",
     "787.7e0b23c5.chunk.js.map": "/soccer-app/static/js/787.7e0b23c5.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.41373263.css",
-    "static/js/main.b2747f5f.js"
+    "static/css/main.446f8687.css",
+    "static/js/main.ee2e9629.js"
   ]
 }
