@@ -1,37 +1,75 @@
 .app {
 	width: 1024px;
 	margin: 0 auto;
-	
+
 	padding: 20px;
 
 	display: flex;
 
-	box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
 
 .app .table {
 	padding: 10px 0;
 }
 
-.app .table a {
-	text-decoration: none;
-	color: #000;
-	font-weight: 600;
-}
-
-.app .table:nth-child(even) {
-	background-color: rgba(0,0,0,0.1);
-}
-
-.app .table:hover {
-	background-color: rgba(0,0,0,0.5);
-	cursor: pointer;
-}
 
 .app-main {
 	flex: 1;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+	border-radius: 5px;
 }
 
 aside {
 	flex: 1;
+}
+
+.match-row {
+	display: flex;
+	text-decoration: none;
+	align-items: center;
+	color: #000;
+	font-weight: 600;
+	padding: 10px;
+}
+
+.match-row .teams .home, 
+.match-row .teams .away {
+	display: flex;
+	justify-content: space-between;
+}
+
+.match-row:nth-child(even) {
+	background-color: rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+}
+
+.app .match-row:hover {
+	background-color: rgba(0, 0, 0, 0.5);
+	cursor: pointer;
+}
+
+
+/* Team Componnet */
+.header h3 {
+	text-align: center;
+}
+
+.team-information {
+	display: flex;
+	/* flex-direction: column; */
+	align-items: center;
+	justify-content: center;
+}
+
+.team-logo-container {
+	padding: 10px;
+	/* width: 200px; */
+	/* height: 200px; */
+	/* background-color: red; */
+}
+
+.team-logo-container img {
+	width: 100%;
+	height: 100%;
 }

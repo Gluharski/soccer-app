@@ -27,32 +27,37 @@ const Details = () => {
 	console.log(data);
 
 	return (
-		// TODO: change style to separate file
-		<div style={typeof data === undefined
-			? { display: 'none' }
-			: { display: 'block' }
-		}>
-			{data.length > 0
-				? data.map(x =>
-					<>
-						<h3>
-							{x.league.name}
-						</h3>
+		<>
+		{/* // TODO: change style to separate file */}
+			<div style={typeof data === undefined
+				? { display: 'none' }
+				: { display: 'block' }
+			}>
+				{data.length > 0
+					? data.map(x =>
+						<>
+							<h3>
+								{x.league.name}
+							</h3>
 
-						<div>
-							<Link to={`/team-details/${x.teams.home.id}`}>
-								{x.teams.home.name}
-							</Link>
+							<div>
+								<Link to={`/team-details/${x.teams.home.id}`}>
+									{x.teams.home.name}
+								</Link>
 
-							<Link to={`/team-details/${x.teams.away.id}`}>
-								{x.teams.away.name}
-							</Link>
-						</div>
-					</>
-				)
-				: null
-			}
-		</div>
+								<Link to={`/team-details/${x.teams.away.id}`}>
+									{x.teams.away.name}
+								</Link>
+							</div>
+						</>
+					)
+					: null
+				}
+			</div>
+			<section className='#'>
+				<h3>line-ups</h3>
+			</section>
+		</>
 	)
 }
 

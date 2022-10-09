@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 
+import './App.css';
 import Details from './components/Details';
 import Team from './components/Team';
-import './App.css';
+import Player from './components/Player';
 
 function App() {
     const [matches, setMatches] = useState([]);
@@ -33,13 +34,26 @@ function App() {
 
                 {matches.length > 0
                     ? matches.map(x =>
-                        <div className='table'>
-                            <Link to={`/match-details/${x.fixture.id}`}>
+                        <Link className='match-row' to={`/match-details/${x.fixture.id}`}>
+                            <div className='match-time'>
                                 {x.fixture.status.elapsed}'
+                            </div>
+                            <div className='teams'>
+                                {/* home team info */}
+                                <div className='home'>
+                                    {x.teams.home.name}
+                                    {x.goals.home}
+                                </div>
 
-                                {x.teams.home.name} - {x.teams.away.name}
-                            </Link>
-                        </div>
+                                {/* away team info */}
+                                <div className='away'>
+                                    {x.teams.away.name}
+                                    <div>
+                                        {x.goals.away}
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
                     )
                     : null}
             </main>
@@ -48,6 +62,7 @@ function App() {
                 <Routes>
                     <Route path='/match-details/:matchId' element={<Details />} />
                     <Route path='/team-details/:teamId' element={<Team />} />
+                    <Route path='/player-details/:playerId' element={<Player />} />
                 </Routes>
             </aside>
         </section>
