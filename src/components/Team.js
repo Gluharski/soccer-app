@@ -182,20 +182,27 @@ const Team = () => {
 
 			{/* last 5 matches */}
 			<div className='last-matches'>
-				<h3>last 5 matches</h3>
+				<h3 className='title-section'>last 5 matches</h3>
 				{lastMatches?.length > 0
 					? lastMatches.map(x => (
 						<li>
-							<div className={x.teams.home.winner
-								? 'winner'
-								: null}>
-								{x.teams.home.name} {x.goals.home}
+							<div className='last-matches-date'>
+								{dateLibrary.date(x.fixture.date)}
 							</div>
-							-
-							<div className={x.teams.away.winner
-								? 'winner'
-								: null}>
-								{x.teams.away.name} {x.goals.away}
+							<div className='last-matches-teams'>
+								<div className={x.teams.home.winner
+									? 'winner'
+									: null}>
+									{x.teams.home.name} {x.goals.home}
+								</div>
+								-
+								<div className={x.teams.away.winner
+									? 'winner'
+									: null}>
+
+									{x.goals.away}
+									{x.teams.away.name}
+								</div>
 							</div>
 						</li>
 					))

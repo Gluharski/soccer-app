@@ -114,7 +114,8 @@ aside {
 
 h3.title-section {
 	margin-top: 5px;
-} 
+	text-transform: uppercase;
+}
 
 .next-match-league-name,
 .next-match-league-date {
@@ -132,7 +133,7 @@ h3.title-section {
 }
 
 .match-time {
-	flex:1;
+	flex: 1;
 }
 
 .upcoming-match-teams {
@@ -163,8 +164,27 @@ h3.title-section {
 	height: 75px;
 }
 
-.last-matches li {
+.last-matches {
 	display: flex;
+	flex-direction: column;
+
+	padding: 10px;
+	margin-top: 10px;
+
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+}
+
+.last-matches li {
+	padding: 5px 0;
+	display: flex;
+	justify-content: space-between;
+	/* justify-content: center; */
+}
+
+.last-matches li .last-matches-teams{
+	display: flex;
+	/* justify-content: center; */
 }
 
 .winner {
@@ -173,4 +193,11 @@ h3.title-section {
 
 .live {
 	border: 3px solid green;
+}
+
+
+
+.flex {
+	display: flex;
+	justify-content: space-between;
 }
