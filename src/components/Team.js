@@ -7,6 +7,7 @@ const Team = () => {
 	const [details, setDetails] = useState([]);
 	const [transfers, setTransfers] = useState([]);
 	const [teamInformation, setTeamInformation] = useState([]);
+	const [upcomingMatches, setUpcomingMatches] = useState([]);
 	const { teamId } = useParams();
 
 	// venue
@@ -54,7 +55,23 @@ const Team = () => {
 			.catch(err => console.error(err));
 	}, []);
 
-	console.log(teamInformation);
+
+	// next matches
+	useEffect(() => {
+		fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?team=${teamId}&next=1`, {
+			headers: {
+				'X-RapidAPI-Key': '16393793dbmsh4d76b449ff481c6p19207bjsn3ae3d8e407ae',
+				'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+			}
+		})
+			.then(response => response.json())
+			.then(response => {
+				setUpcomingMatches(response.response)
+			})
+			.catch(err => console.error(err));
+	}, []);
+
+	console.log(upcomingMatches);
 
 	return (
 		<section className='team-details'>
@@ -89,12 +106,51 @@ const Team = () => {
 								</div>
 							</div>
 						</div>
-
-
-						{/* TODO: bolded country name in css */}
-						{/* league / country league */}
-
 					</>
+				))}
+			</div>
+
+			{/* next matches */}
+			<div className='next-match'>
+				<h3>Next Match</h3>
+				{upcomingMatches.map(x => (
+
+					<>
+
+						{/* header */}
+						<h3 className='next-match-league-name'>
+							{x.league.name}
+						</h3>
+						<h4 className='next-match-league-date'>
+							{x.fixture.date}
+						</h4>
+
+						<div className='upcoming-match-teams'>
+							<div className='upcoming-match-home-team'>
+								{x.teams.home.name}
+								<div className='upcoming-match-logo-container'>
+									<img src={x.teams.home.logo} />
+								</div>
+							</div>
+
+							<div className='upcoming-match-hour'>
+								{/* current hour */}
+								{x.fixture.timestamp}
+							</div>
+
+							<div className='upcoming-match-away-team'>
+								{x.teams.away.name}
+								<div className='upcoming-match-logo-container'>
+									<img src={x.teams.away.logo} />
+								</div>
+							</div>
+						</div>
+					</>
+					// league name,
+					// date
+
+					// 3 column card =>
+					// name logo => date => name logo
 				))}
 			</div>
 

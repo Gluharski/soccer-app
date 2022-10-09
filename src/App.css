@@ -73,3 +73,41 @@ aside {
 	width: 100%;
 	height: 100%;
 }
+
+/* Next match */
+.next-match {
+	display: flex;
+	flex-direction: column;
+}
+
+.next-match-league-name,
+.next-match-league-date {
+	text-align: center;
+}
+
+.upcoming-match-teams {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+}
+
+.upcoming-match-teams
+.upcoming-match-home-team,
+.upcoming-match-away-team {
+	display: flex;
+	/* justify-content: center; */
+	flex-direction: column-reverse;
+	align-items: center;
+}
+
+.upcoming-match-teams .upcoming-match-logo-container {
+	width: 75px;
+	height: 75px;
+}
+
+.upcoming-match-teams .upcoming-match-logo-container img {
+	width: 75px;
+	height: 75px;
+}
+
