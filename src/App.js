@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 
 import './App.css';
@@ -36,30 +36,30 @@ function App() {
                     ? matches.map(x =>
                         <Link className='match-row' to={`/match-details/${x.fixture.id}`}>
                             {/* <div className='match-row-information'> */}
-                                <div className='match-time'>
-                                    {x.fixture.status.elapsed}'
-                                </div>
-                                <div className='teams'>
-                                    {/* home team info */}
-                                    <div className='home-team-information'>
-                                        <div className='home-team-name'>
-                                            {x.teams.home.name}
-                                        </div>
-                                        <div className='home-team-goals'>
-                                            {x.goals.home}
-                                        </div>
+                            <div className='match-time'>
+                                {x.fixture.status.elapsed}'
+                            </div>
+                            <div className='teams'>
+                                {/* home team info */}
+                                <div className='home-team-information'>
+                                    <div className='home-team-name'>
+                                        {x.teams.home.name}
                                     </div>
+                                    <div className='home-team-goals'>
+                                        {x.goals.home}
+                                    </div>
+                                </div>
 
-                                    {/* away team info */}
-                                    <div className='away-team-information'>
-                                        <div className='away-team-name'>
-                                            {x.teams.away.name}
-                                        </div>
-                                        <div className='away-team-goals'>
-                                            {x.goals.away}
-                                        </div>
+                                {/* away team info */}
+                                <div className='away-team-information'>
+                                    <div className='away-team-name'>
+                                        {x.teams.away.name}
+                                    </div>
+                                    <div className='away-team-goals'>
+                                        {x.goals.away}
                                     </div>
                                 </div>
+                            </div>
                             {/* </div> */}
                         </Link>
                     )
@@ -67,11 +67,13 @@ function App() {
             </main>
 
             <aside>
-                <Routes>
-                    <Route path='/match-details/:matchId' element={<Details />} />
-                    <Route path='/team-details/:teamId' element={<Team />} />
-                    <Route path='/player-details/:playerId' element={<Player />} />
-                </Routes>
+                <Suspense fallback={<h1>Loading data...</h1>}>
+                    <Routes>
+                        <Route path='/match-details/:matchId' element={<Details />} />
+                        <Route path='/team-details/:teamId' element={<Team />} />
+                        <Route path='/player-details/:playerId' element={<Player />} />
+                    </Routes>
+                </Suspense>
             </aside>
         </section>
     );

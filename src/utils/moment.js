@@ -9,7 +9,7 @@ export const date = (data) => {
 
 // convert time
 export const time = (data) => {
-	const convertedHour = moment(data).format('hh:mm');
+	const convertedHour = moment(data).format('hh:mm').toString();
 	// console.log(convertedHour);
 
 	return convertedHour;
