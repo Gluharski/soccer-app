@@ -8,8 +8,6 @@ import Player from './components/Player';
 
 function App() {
     const [matches, setMatches] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [fixtures, setFixtures] = useState([]);
 
     useEffect(() => {
         fetch('https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all', {
