@@ -201,3 +201,7 @@ h3.title-section {
 	display: flex;
 	justify-content: space-between;
 }
+
+.hide {
+	display: none;
+}

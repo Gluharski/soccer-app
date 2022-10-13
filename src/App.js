@@ -5,11 +5,13 @@ import './App.css';
 import Details from './components/Details';
 import Team from './components/Team';
 import Player from './components/Player';
+import { liveMatches } from './utils/liveMatches';
 
 function App() {
     const [matches, setMatches] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
     const [fixtures, setFixtures] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isHidden, setIsHidden] = useState(true);
 
     useEffect(() => {
         fetch('https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all', {
@@ -31,16 +33,14 @@ function App() {
                 <h3>
                     {matches.length} matches live
                 </h3>
-
+                {/* {liveMatches(matches)} */}
                 {matches.length > 0
                     ? matches.map(x =>
                         <Link className='match-row' to={`/match-details/${x.fixture.id}`}>
-                            {/* <div className='match-row-information'> */}
                                 <div className='match-time'>
                                     {x.fixture.status.elapsed}'
                                 </div>
                                 <div className='teams'>
-                                    {/* home team info */}
                                     <div className='home-team-information'>
                                         <div className='home-team-name'>
                                             {x.teams.home.name}
@@ -50,7 +50,6 @@ function App() {
                                         </div>
                                     </div>
 
-                                    {/* away team info */}
                                     <div className='away-team-information'>
                                         <div className='away-team-name'>
                                             {x.teams.away.name}
@@ -60,13 +59,12 @@ function App() {
                                         </div>
                                     </div>
                                 </div>
-                            {/* </div> */}
                         </Link>
                     )
-                    : null}
+                    : 'There is no live matches yet.'}
             </main>
 
-            <aside>
+            <aside style={{ display: 'block' }}>
                 <Routes>
                     <Route path='/match-details/:matchId' element={<Details />} />
                     <Route path='/team-details/:teamId' element={<Team />} />
