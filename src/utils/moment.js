@@ -9,14 +9,14 @@ export const date = (data) => {
 
 // convert time
 export const time = (data) => {
-	const convertedHour = moment(data).format('hh:mm');
+	const convertedHour = moment(data).format('hh:mm').toString();
 	// console.log(convertedHour);
 
 	return convertedHour;
 }
 
 // convert unix code`
-export const unix = (data) => {
-	const now = moment();
-	const convertedSeconds = moment().unix(data);
-}
+// export const unix = (data) => {
+// 	const now = moment();
+// 	const convertedSeconds = moment().unix(data);
+// }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 
 import './App.css';
@@ -9,9 +9,6 @@ import { liveMatches } from './utils/liveMatches';
 
 function App() {
     const [matches, setMatches] = useState([]);
-    const [fixtures, setFixtures] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isHidden, setIsHidden] = useState(true);
 
     useEffect(() => {
         fetch('https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all', {
@@ -37,39 +34,47 @@ function App() {
                 {matches.length > 0
                     ? matches.map(x =>
                         <Link className='match-row' to={`/match-details/${x.fixture.id}`}>
-                                <div className='match-time'>
-                                    {x.fixture.status.elapsed}'
-                                </div>
-                                <div className='teams'>
-                                    <div className='home-team-information'>
-                                        <div className='home-team-name'>
-                                            {x.teams.home.name}
-                                        </div>
-                                        <div className='home-team-goals'>
-                                            {x.goals.home}
-                                        </div>
-                                    </div>
 
-                                    <div className='away-team-information'>
-                                        <div className='away-team-name'>
-                                            {x.teams.away.name}
-                                        </div>
-                                        <div className='away-team-goals'>
-                                            {x.goals.away}
-                                        </div>
+                            {/* <div className='match-row-information'> */}
+                            <div className='match-time'>
+                                {x.fixture.status.elapsed}'
+                            </div>
+                            <div className='teams'>
+                                {/* home team info */}
+                                <div className='home-team-information'>
+                                    <div className='home-team-name'>
+                                        {x.teams.home.name}
+                                    </div>
+                                    <div className='home-team-goals'>
+                                        {x.goals.home}
                                     </div>
                                 </div>
+
+
+                                {/* away team info */}
+                                <div className='away-team-information'>
+                                    <div className='away-team-name'>
+                                        {x.teams.away.name}
+                                    </div>
+                                    <div className='away-team-goals'>
+                                        {x.goals.away}
+                                    </div>
+                                </div>
+                            </div>
+                            {/* </div> */}
                         </Link>
                     )
                     : 'There is no live matches yet.'}
             </main>
 
-            <aside style={{ display: 'block' }}>
-                <Routes>
-                    <Route path='/match-details/:matchId' element={<Details />} />
-                    <Route path='/team-details/:teamId' element={<Team />} />
-                    <Route path='/player-details/:playerId' element={<Player />} />
-                </Routes>
+            <aside>
+                <Suspense fallback={<h1>Loading data...</h1>}>
+                    <Routes>
+                        <Route path='/match-details/:matchId' element={<Details />} />
+                        <Route path='/team-details/:teamId' element={<Team />} />
+                        <Route path='/player-details/:playerId' element={<Player />} />
+                    </Routes>
+                </Suspense>
             </aside>
         </section>
     );
