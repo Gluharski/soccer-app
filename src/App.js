@@ -6,6 +6,7 @@ import Details from './components/Details';
 import Team from './components/Team';
 import Player from './components/Player';
 import { liveMatches } from './utils/liveMatches';
+// import { filter } from './utils/filter';
 
 function App() {
     const [matches, setMatches] = useState([]);
@@ -32,39 +33,39 @@ function App() {
                 </h3>
                 {/* {liveMatches(matches)} */}
                 {matches.length > 0
-                    ? matches.map(x =>
+                    ? matches.map(x => (
                         <Link className='match-row' to={`/match-details/${x.fixture.id}`}>
+                            <div className='match-row-information'>
+                                {/* {filter(matches)} */}
+                                <Link className='match-row' to={`/match-details/${x.fixture.id}`}>
+                                    <div className='match-time'>
+                                        {x.fixture.status.elapsed}'
+                                    </div>
 
-                            {/* <div className='match-row-information'> */}
-                            <div className='match-time'>
-                                {x.fixture.status.elapsed}'
+                                    <div className='teams'>
+                                        <div className='home-team-information'>
+                                            <div className='home-team-name'>
+                                                {x.teams.home.name}
+                                            </div>
+                                            <div className='home-team-goals'>
+                                                {x.goals.home}
+                                            </div>
+                                        </div>
+
+                                        <div className='away-team-information'>
+                                            <div className='away-team-name'>
+                                                {x.teams.away.name}
+                                            </div>
+                                            <div className='away-team-goals'>
+                                                {x.goals.away}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
                             </div>
-                            <div className='teams'>
-                                {/* home team info */}
-                                <div className='home-team-information'>
-                                    <div className='home-team-name'>
-                                        {x.teams.home.name}
-                                    </div>
-                                    <div className='home-team-goals'>
-                                        {x.goals.home}
-                                    </div>
-                                </div>
-
-
-                                {/* away team info */}
-                                <div className='away-team-information'>
-                                    <div className='away-team-name'>
-                                        {x.teams.away.name}
-                                    </div>
-                                    <div className='away-team-goals'>
-                                        {x.goals.away}
-                                    </div>
-                                </div>
-                            </div>
-                            {/* </div> */}
                         </Link>
-                    )
-                    : 'There is no live matches yet.'}
+                    ))
+                    : 'There is no info yey.'}
             </main>
 
             <aside>
@@ -76,8 +77,8 @@ function App() {
                     </Routes>
                 </Suspense>
             </aside>
-        </section>
-    );
+        </section >
+    )
 }
 
 export default App;

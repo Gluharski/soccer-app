@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import * as dateLibrary from '../utils/moment';
@@ -96,121 +96,123 @@ const Team = () => {
 
 	return (
 		<section className='team-details'>
-			<div className='header'>
-				{teamInformation.map(x => (
-					<>
-						<h3>
-							{x.team.name}
-						</h3>
+			<Suspense fallback={<h1>Loading data...</h1>}>
+				<div className='header'>
+					<h3 className='title-section'>team information</h3>
+					{teamInformation.map(x => (
+						<>
+							<h3>
+								{x.team.name}
+							</h3>
 
-						{/* flag / country name */}
-						<div className='team-information'>
-							<div className='team-logo-container'>
-								<img src={x.team.logo} />
-							</div>
+							{/* flag / country name */}
+							<div className='team-information'>
+								<div className='team-logo-container'>
+									<img src={x.team.logo} />
+								</div>
 
 
-							{/* venue information */}
-							<div className='venue-information'>
-								<div className='venue-country'>
-									<b>Country:</b> {x.team.country}
-								</div>
-								<div className='venue-city'>
-									<b>City:</b> {x.venue.city}
-								</div>
-								<div className='venue-name' title={x.venue.name}>
-									<b>Stadium:</b>
-									{x.venue.name?.length >= 10
-										? x.venue.name.substring(0, 10) + '...'
-										: x.venue.name
-									}
-								</div>
-								<div className='venue-capacitiy'>
-									<b>Capacity:</b> {x.venue.capacity}
-								</div>
-							</div>
-						</div>
-					</>
-				))}
-			</div>
-
-			{/* next matches */}
-			<div className='next-match'>
-				<h3 className='title-section'>NEXT MATCH</h3>
-				{upcomingMatches?.length > 0
-					?
-					upcomingMatches.map(x => {
-						return (
-							<>
-								{/* header */}
-								<h3 className='next-match-league-name'>
-									{x.league.name}
-								</h3>
-								<div className='next-match-league-date'>
-									<div className='sub-title'>
-										{x.league.round},
-										{dateLibrary.date(x.fixture.date)}
+								{/* venue information */}
+								<div className='venue-information'>
+									<div className='venue-country'>
+										<b>Country:</b> {x.team.country}
+									</div>
+									<div className='venue-city'>
+										<b>City:</b> {x.venue.city}
+									</div>
+									<div className='venue-name' title={x.venue.name}>
+										<b>Stadium:</b>
+										{x.venue.name?.length >= 10
+											? x.venue.name.substring(0, 10) + '...'
+											: x.venue.name
+										}
+									</div>
+									<div className='venue-capacitiy'>
+										<b>Capacity:</b> {x.venue.capacity}
 									</div>
 								</div>
+							</div>
+						</>
+					))}
+				</div>
 
-								<div className='upcoming-match-teams'>
-									<div className='upcoming-match-home-team'>
-										{x.teams.home.name}
-										<div className='upcoming-match-logo-container'>
-											<img src={x.teams.home.logo} />
+				{/* next matches */}
+				<div className='next-match'>
+					<h3 className='title-section'>NEXT MATCH</h3>
+					{upcomingMatches?.length > 0
+						?
+						upcomingMatches.map(x => {
+							return (
+								<>
+									{/* header */}
+									<h3 className='next-match-league-name'>
+										{x.league.name}
+									</h3>
+									<div className='next-match-league-date'>
+										<div className='sub-title'>
+											{x.league.round},
+											{dateLibrary.date(x.fixture.date)}
 										</div>
 									</div>
 
-									<div className='upcoming-match-hour'>
-										{/* current hour */}
-										{dateLibrary.time(x.fixture.date)}
-										{/* {dateLibrary.unix(x.fixture.timestamp)} */}
-									</div>
+									<div className='upcoming-match-teams'>
+										<div className='upcoming-match-home-team'>
+											{x.teams.home.name}
+											<div className='upcoming-match-logo-container'>
+												<img src={x.teams.home.logo} />
+											</div>
+										</div>
 
-									<div className='upcoming-match-away-team'>
+										<div className='upcoming-match-hour'>
+											{/* current hour */}
+											{dateLibrary.time(x.fixture.date)}
+											{/* {dateLibrary.unix(x.fixture.timestamp)} */}
+										</div>
+
+										<div className='upcoming-match-away-team'>
+											{x.teams.away.name}
+											<div className='upcoming-match-logo-container'>
+												<img src={x.teams.away.logo} />
+											</div>
+										</div>
+									</div>
+								</>
+							);
+						})
+						: 'There is no information about upcoming matches.'}
+				</div>
+
+				{/* last 5 matches */}
+				<div className='last-matches'>
+					<h3 className='title-section'>last 5 matches</h3>
+					{lastMatches?.length > 0
+						? lastMatches.map(x => (
+							<li>
+								<div className='last-matches-date'>
+									{dateLibrary.date(x.fixture.date)}
+								</div>
+								<div className='last-matches-teams'>
+									<div className={x.teams.home.winner
+										? 'winner'
+										: null}>
+										{x.teams.home.name} {x.goals.home}
+									</div>
+									-
+									<div className={x.teams.away.winner
+										? 'winner'
+										: null}>
+
+										{x.goals.away}
 										{x.teams.away.name}
-										<div className='upcoming-match-logo-container'>
-											<img src={x.teams.away.logo} />
-										</div>
 									</div>
 								</div>
-							</>
-						);
-					})
-					: 'There is no information about upcoming matches.'}
-			</div>
+							</li>
+						))
+						: 'There is no data for previous matches.'}
+				</div>
 
-			{/* last 5 matches */}
-			<div className='last-matches'>
-				<h3 className='title-section'>last 5 matches</h3>
-				{lastMatches?.length > 0
-					? lastMatches.map(x => (
-						<li>
-							<div className='last-matches-date'>
-								{dateLibrary.date(x.fixture.date)}
-							</div>
-							<div className='last-matches-teams'>
-								<div className={x.teams.home.winner
-									? 'winner'
-									: null}>
-									{x.teams.home.name} {x.goals.home}
-								</div>
-								-
-								<div className={x.teams.away.winner
-									? 'winner'
-									: null}>
-
-									{x.goals.away}
-									{x.teams.away.name}
-								</div>
-							</div>
-						</li>
-					))
-					: 'There is no data for previous matches.'}
-			</div>
-
-			{/* transfer section */}
-			{/* <div className='latest-transfers'>
+				{/* transfer section */}
+				{/* <div className='latest-transfers'>
 				<h3>latest transfers:</h3>
 				{transfers?.length ? transfers.map(x => (
 					<div>
@@ -222,6 +224,7 @@ const Team = () => {
 					: 'There is no data for transfers.'
 				}
 			</div> */}
+			</Suspense>
 		</section>
 	)
 }
