@@ -5,7 +5,7 @@ import './App.css';
 import Details from './components/Details';
 import Team from './components/Team';
 import Player from './components/Player';
-import { liveMatches } from './utils/liveMatches';
+// import { liveMatches } from './utils/liveMatches';
 // import { filter } from './utils/filter';
 
 function App() {
@@ -37,31 +37,29 @@ function App() {
                         <Link className='match-row' to={`/match-details/${x.fixture.id}`}>
                             <div className='match-row-information'>
                                 {/* {filter(matches)} */}
-                                <Link className='match-row' to={`/match-details/${x.fixture.id}`}>
-                                    <div className='match-time'>
-                                        {x.fixture.status.elapsed}'
-                                    </div>
+                                <div className='match-time'>
+                                    {x.fixture.status.elapsed}'
+                                </div>
 
-                                    <div className='teams'>
-                                        <div className='home-team-information'>
-                                            <div className='home-team-name'>
-                                                {x.teams.home.name}
-                                            </div>
-                                            <div className='home-team-goals'>
-                                                {x.goals.home}
-                                            </div>
+                                <div className='teams'>
+                                    <div className='home-team-information'>
+                                        <div className='home-team-name'>
+                                            {x.teams.home.name}
                                         </div>
-
-                                        <div className='away-team-information'>
-                                            <div className='away-team-name'>
-                                                {x.teams.away.name}
-                                            </div>
-                                            <div className='away-team-goals'>
-                                                {x.goals.away}
-                                            </div>
+                                        <div className='home-team-goals'>
+                                            {x.goals.home}
                                         </div>
                                     </div>
-                                </Link>
+
+                                    <div className='away-team-information'>
+                                        <div className='away-team-name'>
+                                            {x.teams.away.name}
+                                        </div>
+                                        <div className='away-team-goals'>
+                                            {x.goals.away}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </Link>
                     ))
