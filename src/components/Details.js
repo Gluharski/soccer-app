@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from "react-router-dom";
 
-import * as team from '../utils/team';
+import * as startXI from '../utils/players';
 
 const Details = () => {
 	const [data, setData] = useState([]);
-	const [teams, setTeams] = useState([]);
 	const [players, setPlayers] = useState([]);
+	const [coaches, setCoaches] = useState([]);
 
 	const { matchId } = useParams();
 
@@ -40,65 +40,100 @@ const Details = () => {
 		})
 			.then(response => response.json())
 			.then(response => {
-				setTeams(response.response);
-				setPlayers(response.response)
+				// console.log(response)
+				setCoaches(response.response);
+				setPlayers(response.response);
 			})
 			.catch(err => console.error(err));
 	}, [matchId]);
 
-	// console.log(data);
-	// console.log(players)
+	console.log(players);
 
 	return (
 		<>
 			{/* // TODO: change style to separate file */}
-			<div style={typeof data === undefined
-				? { display: 'none' }
-				: { display: 'block' }
-			}>
-				{data.length > 0
-					? data.map(x =>
-						<>
-							<h3>
-								{x.league.name}
-							</h3>
+			{data.length > 0
+				? data.map(x =>
+					<>
+						<h3>
+							{x.league.name}
+						</h3>
 
-							<div>
-								<Link to={`/team-details/${x.teams.home.id}`}>
-									{x.teams.home.name}
-								</Link>
+						<div>
+							<Link to={`/team-details/${x.teams.home.id}`}>
+								{x.teams.home.name}
+							</Link>
 
-								<Link to={`/team-details/${x.teams.away.id}`}>
-									{x.teams.away.name}
-								</Link>
-							</div>
-						</>
-					)
-					: null
-				}
-			</div>
+							<Link to={`/team-details/${x.teams.away.id}`}>
+								{x.teams.away.name}
+							</Link>
+						</div>
+					</>
+				)
+				: null
+			}
 
-			{/*  */}
-			<section className='team-lineups'>
-				<h4>fomrations:</h4>
-				<div className='team-fomrations'>
-					{teams.map(x => (
-						<section style={{ display: 'flex' }}>
+			<section>
+				<ul style={{
+					display: 'flex',
+					margin: '20px 0',
+					padding: 0,
+					justifyContent: 'space-between',
+					listStyle: 'none'
+				}}>
+					{coaches.map(x => (
+						<li>
 							{x.formation}
-						</section>
+						</li>
 					))}
-				</div>
+				</ul>
+			</section>
 
-				<div>
-					{/* {players.length > 0 || typeof players === undefined
-						? team.startingXI(players)
-						: 'There is no data about the lineups yet.'
-					} */}
+			<section>
+				<h4>Players:</h4>
+				<ul>
+					{players.map(x => (
+						<li>
+							{x.startXI.length > 0 && x.startXI !== undefined
+								? x.startXI.map(x => (
+									<div>
+										{x.player.name}
+									</div>
+								))
+								: 'There is no lineups yet.'
+							}
+						</li>
+					))}
+				</ul>
+			</section>
 
-					{/* {players.map(x => {
-						return x.startXI;
-					})} */}
-				</div>
+			<section style={{
+				width: '100%',
+				backgroundColor: 'red'
+			}}>
+				<h4>Coaches:</h4>
+				<ul style={{
+					listStyle: 'none',
+					margin: 0,
+					padding: 0,
+					display: 'flex',
+					justifyContent: 'space-between'
+				}}>
+					{coaches.length > 0 ?
+						coaches.map(x => (
+							<li style={{
+								display: 'flex',
+								justifyContent: 'center',
+								flexDirection: 'column-reverse',
+								alignItems: 'center'
+							}}>
+								{x.coach.name}
+								<img src={x.coach.photo} />
+							</li>
+						))
+						: 'There is no data for coaches yet.'
+					}
+				</ul>
 			</section>
 		</>
 	)

@@ -5,7 +5,6 @@ import './App.css';
 import Details from './components/Details';
 import Team from './components/Team';
 import Player from './components/Player';
-import { liveMatches } from './utils/liveMatches';
 
 function App() {
     const [matches, setMatches] = useState([]);
@@ -30,7 +29,7 @@ function App() {
                 <h3>
                     {matches.length} matches live
                 </h3>
-                {/* {liveMatches(matches)} */}
+
                 {matches.length > 0
                     ? matches.map(x =>
                         <Link className='match-row' to={`/match-details/${x.fixture.id}`}>

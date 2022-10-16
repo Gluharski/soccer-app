@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-import * as dateLibrary from '../utils/moment';
+import * as momentjs from '../utils/moment';
 
 import '../App.css';
 
@@ -149,7 +149,7 @@ const Team = () => {
 								<div className='next-match-league-date'>
 									<div className='sub-title'>
 										{x.league.round},
-										{dateLibrary.date(x.fixture.date)}
+										{momentjs.date(x.fixture.date)}
 									</div>
 								</div>
 
@@ -163,8 +163,7 @@ const Team = () => {
 
 									<div className='upcoming-match-hour'>
 										{/* current hour */}
-										{dateLibrary.time(x.fixture.date)}
-										{/* {dateLibrary.unix(x.fixture.timestamp)} */}
+										{momentjs.time(x.fixture.date)}
 									</div>
 
 									<div className='upcoming-match-away-team'>
@@ -187,7 +186,7 @@ const Team = () => {
 					? lastMatches.map(x => (
 						<li>
 							<div className='last-matches-date'>
-								{dateLibrary.date(x.fixture.date)}
+								{momentjs.date(x.fixture.date)}
 							</div>
 							<div className='last-matches-teams'>
 								<div className={x.teams.home.winner
