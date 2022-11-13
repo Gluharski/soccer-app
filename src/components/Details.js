@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from "react-router-dom";
 
-import * as startXI from '../utils/players';
+// import * as startXI from '../utils/players';
 
 const Details = () => {
 	const [data, setData] = useState([]);

@@ -2,27 +2,16 @@ import { useState, useEffect, Suspense } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 
 import './App.css';
+// import Team from './components/Team';
 import Details from './components/Details';
-import Team from './components/Team';
-import Player from './components/Player';
-// import { liveMatches } from './utils/liveMatches';
-// import { filter } from './utils/filter';
+
+import { library } from './utils/lib';
 
 function App() {
     const [matches, setMatches] = useState([]);
 
     useEffect(() => {
-        fetch('https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all', {
-            headers: {
-                'X-RapidAPI-Key': '16393793dbmsh4d76b449ff481c6p19207bjsn3ae3d8e407ae',
-                'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
-            }
-        })
-            .then(response => response.json())
-            .then(response => {
-                setMatches(response.response);
-            })
-            .catch(err => console.error(err));
+        library().then(data => setMatches(data));
     }, []);
 
     return (
@@ -31,49 +20,43 @@ function App() {
                 <h3>
                     {matches.length} matches live
                 </h3>
-
                 {matches.length > 0
                     ? matches.map(x => (
-                        <Link className='match-row' to={`/match-details/${x.fixture.id}`}>
-                            <div className='match-row-information'>
-                                {/* {filter(matches)} */}
-                                <div className='match-time'>
-                                    {x.fixture.status.elapsed}'
-                                </div>
-
-                                <div className='teams'>
-                                    <div className='home-team-information'>
-                                        <div className='home-team-name'>
-                                            {x.teams.home.name}
-                                        </div>
-                                        <div className='home-team-goals'>
-                                            {x.goals.home}
-                                        </div>
-                                    </div>
-
-                                    <div className='away-team-information'>
-                                        <div className='away-team-name'>
-                                            {x.teams.away.name}
-                                        </div>
-                                        <div className='away-team-goals'>
-                                            {x.goals.away}
+                        <div style={{
+                            margin: '20px 0',
+                        }}>
+                            {x.name}
+                            <div>
+                                {x.matches.map(x => (
+                                    <div>
+                                        <div style={{
+                                            padding: '10px 0',
+                                            margin: '5px 0',
+                                            textAlign: 'center',
+                                            fontWeight: '600',
+                                            fontSize: '14px',
+                                            backgroundColor: 'rgba(0,0,0,0.1)',
+                                            color: 'black'
+                                        }}>
+                                            <Link to={`/match-details/${x.id}`}>
+                                                {x.home.name} - {x.away.name}
+                                            </Link>
                                         </div>
                                     </div>
-                                </div>
+                                ))}
                             </div>
-                        </Link>
+                        </div>
                     ))
-                    : 'There is no info yey.'}
+                    : []
+                }
             </main>
 
             <aside>
-                <Suspense fallback={<h1>Loading data...</h1>}>
-                    <Routes>
-                        <Route path='/match-details/:matchId' element={<Details />} />
-                        <Route path='/team-details/:teamId' element={<Team />} />
-                        <Route path='/player-details/:playerId' element={<Player />} />
-                    </Routes>
-                </Suspense>
+                <Routes>
+                    <Route path='/match-details/:matchId' element={<Details />} />
+                    {/* <Route path='/team-details/:teamId' element={<Team />} /> */}
+                    {/* <Route path='/player-details/:playerId' element={<Player />} /> */}
+                </Routes>
             </aside>
         </section >
     )
